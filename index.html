@@ -466,15 +466,15 @@
 
         // Orden personalizado de salas
         const ORDEN_SALAS = [
-            "GT- SALA 1",
-            "GT- SALA 2",
-            "GT- SALA 3",
-            "GT- SALA 4",
-            "GT- Directorio",
-            "GT- Cabina 1",
-            "GT- Cabina 2",
-            "GT- Cabina 3",
-            "GT- Cabina 4"
+            "GT- Directorio (12 personas)",
+            "GT- Cabina 1 (1 persona)",
+            "GT- Cabina 2 (1 persona)",
+            "GT- Cabina 3 (1 persona)",
+            "GT- Cabina 4 (1 persona)",
+            "GT- SALA 1 (10 personas)",
+            "GT- SALA 2 (10 personas)",
+            "GT- SALA 3 (5 personas)",
+            "GT- SALA 4 (5 personas)"
         ];
 
         let currentData = [];
@@ -39419,35 +39419,28 @@
             // Obtener salas únicas de los datos
             const salasEnDatos = [...new Set(currentData.map(item => item.SalaNombre))];
             
-            // Normalizar nombres para comparación (eliminar espacios y convertir a mayúsculas)
-            const normalizarNombre = (nombre) => nombre.replace(/\s+/g, ' ').trim().toUpperCase();
+            // Crear un mapa de orden personalizado
+            const ordenMap = new Map();
+            ORDEN_SALAS.forEach((sala, index) => {
+                ordenMap.set(sala, index);
+            });
             
-            // Ordenar según ORDEN_SALAS, luego alfabéticamente para las que no están en el orden
+            // Ordenar según el mapa de orden
             const salasOrdenadas = salasEnDatos.sort((a, b) => {
-                const aNorm = normalizarNombre(a);
-                const bNorm = normalizarNombre(b);
+                const orderA = ordenMap.has(a) ? ordenMap.get(a) : 999;
+                const orderB = ordenMap.has(b) ? ordenMap.get(b) : 999;
                 
-                // Buscar índices en el orden personalizado
-                const indexA = ORDEN_SALAS.findIndex(sala => normalizarNombre(sala) === aNorm);
-                const indexB = ORDEN_SALAS.findIndex(sala => normalizarNombre(sala) === bNorm);
-                
-                // Si ambas están en el orden personalizado
-                if (indexA !== -1 && indexB !== -1) {
-                    return indexA - indexB;
+                // Si ambas tienen orden definido, usar ese orden
+                if (orderA !== 999 && orderB !== 999) {
+                    return orderA - orderB;
                 }
                 
-                // Si solo A está en el orden personalizado
-                if (indexA !== -1) {
-                    return -1;
-                }
+                // Si solo una tiene orden, esa va primero
+                if (orderA !== 999) return -1;
+                if (orderB !== 999) return 1;
                 
-                // Si solo B está en el orden personalizado
-                if (indexB !== -1) {
-                    return 1;
-                }
-                
-                // Si ninguna está en el orden, ordenar alfabéticamente
-                return a.localeCompare(b, 'es', { sensitivity: 'base' });
+                // Si ninguna tiene orden, ordenar alfabéticamente
+                return a.localeCompare(b, 'es');
             });
             
             select.innerHTML = '<option value="">-- Selecciona una sala --</option>';
