@@ -39398,7 +39398,7 @@
                 }));
                 
                 console.log('✅ Datos cargados:', currentData.length, 'registros');
-                console.log('📅 Fecha de generación:', DATOS_JSON.runDate);
+                console.log('📅 Fecha del snapshot:', DATOS_JSON.snapshotDateTime || DATOS_JSON.runDate);
                 console.log('🕐 Muestra de hora:', currentData[0]?.HoraInicio);
                 
                 populateSalaSelect();
@@ -39454,7 +39454,9 @@
         }
 
         function updateLastUpdate() {
-            const fechaGeneracion = DATOS_JSON.runDate || 'N/A';
+            // Priorizar la fecha del nombre del archivo (snapshotDateTime)
+            // Si no existe, usar runDate como fallback
+            const fechaGeneracion = DATOS_JSON.snapshotDateTime || DATOS_JSON.runDate || 'N/A';
             document.getElementById('lastUpdate').textContent = fechaGeneracion;
         }
 
