@@ -253,6 +253,7 @@
 
         table {
             width: 100%;
+            table-layout: fixed;
             border-collapse: collapse;
             font-size: 13px;
         }
@@ -279,7 +280,7 @@
         th.hora-header {
             background: rgba(30, 40, 60, 0.95);
             font-weight: 700;
-            min-width: 60px;
+            width: 70px;
         }
 
         body.modo-diurno th.hora-header {
@@ -293,9 +294,9 @@
             border: 1px solid rgba(74, 85, 104, 0.3);
             transition: all 0.2s ease;
             cursor: pointer;
-            min-width: 120px;
             height: 37px;
             vertical-align: middle;
+            overflow: hidden;
         }
 
         /* Contenido dentro de celda ocupada fusionada */
@@ -339,6 +340,7 @@
             padding: 8px;
             text-align: center;
             vertical-align: middle;
+            width: 70px;
         }
 
         body.modo-diurno td.hora {
@@ -20591,9 +20593,7 @@
                     const endMin = lh * 60 + lm + 30;
                     const endH = String(Math.floor(endMin / 60)).padStart(2, '0');
                     const endM = String(endMin % 60).padStart(2, '0');
-                    const timeLabel = span > 1
-                        ? `${slot} - ${endH}:${endM}`
-                        : slot;
+                    const timeLabel = `${slot} - ${endH}:${endM}`;
                     sessions.push({ slot, span, isOcupado: true, subject, timeLabel });
                     i = j;
                 } else {
