@@ -715,13 +715,43 @@
 
         .mobile-view td {
             min-width: 70px;
-            padding: 6px 4px;
-            height: 30px;
+            padding: 0;
+            height: auto;
+        }
+
+        .mobile-view td.hora {
+            padding: 8px 4px;
+            vertical-align: middle;
         }
 
         .mobile-view th {
             padding: 10px 6px;
             font-size: 12px;
+        }
+
+        /* En mobile los bloques de media hora crecen con el contenido */
+        .mobile-view .hour-cell-container {
+            height: auto;
+        }
+
+        .mobile-view .half-hour-block {
+            height: auto;
+            min-height: 46px;
+            padding: 5px 4px;
+        }
+
+        .mobile-view .half-hour-time {
+            font-size: 9px;
+            white-space: nowrap;
+        }
+
+        .mobile-view .half-hour-content {
+            font-size: 10px;
+            white-space: normal;
+            word-break: break-word;
+            line-height: 1.3;
+            -webkit-line-clamp: unset;
+            display: block;
         }
 
         .mobile-view .header h1 {
