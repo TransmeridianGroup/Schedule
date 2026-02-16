@@ -21,7 +21,7 @@
 
         /* Modo Diurno - Colores Pantone */
         body.modo-diurno {
-            background: #FFFFFF;
+            background: #ffffff;
         }
 
         .container {
@@ -36,7 +36,7 @@
 
         body.modo-diurno .container {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
         }
 
         /* Sección del logo */
@@ -188,6 +188,7 @@
             background: rgba(45, 55, 72, 0.7);
             padding: 15px;
             border-radius: 8px;
+            margin-top: 8px;
             margin-bottom: 20px;
             color: white;
             transition: all 0.3s ease;
@@ -218,7 +219,8 @@
             display: flex;
             gap: 20px;
             justify-content: flex-end;
-            margin-bottom: 15px;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
 
         .legend-item {
@@ -251,8 +253,39 @@
             background: #FFFFFF;
         }
 
+        /* Empty state */
+        .empty-state {
+            color: #cbd5e0;
+            padding: 60px 20px;
+            text-align: center;
+            background: rgba(45, 55, 72, 0.3);
+            border-radius: 8px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+        }
+        .empty-state h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: white;
+        }
+        .empty-state p {
+            color: #cbd5e0;
+            font-size: 14px;
+        }
+        body.modo-diurno .empty-state {
+            color: #4a5568;
+            background: #f7fafc;
+            border: 2px dashed #cbd5e0;
+        }
+        body.modo-diurno .empty-state h3 {
+            color: #2d3748;
+        }
+        body.modo-diurno .empty-state p {
+            color: #718096;
+        }
+
         table {
             width: 100%;
+            table-layout: fixed;
             border-collapse: collapse;
             font-size: 13px;
         }
@@ -279,7 +312,7 @@
         th.hora-header {
             background: rgba(30, 40, 60, 0.95);
             font-weight: 700;
-            min-width: 60px;
+            width: 70px;
         }
 
         body.modo-diurno th.hora-header {
@@ -293,13 +326,39 @@
             border: 1px solid rgba(74, 85, 104, 0.3);
             transition: all 0.2s ease;
             cursor: pointer;
-            min-width: 120px;
-            height: 74px;
+            height: 37px;
+            vertical-align: middle;
+            overflow: hidden;
+        }
+
+        /* Contenido dentro de celda ocupada fusionada */
+        .block-time {
+            font-size: 10px;
+            opacity: 0.78;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .block-name {
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.25;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            word-break: break-word;
+            padding: 0 3px;
         }
 
         body.modo-diurno td {
             border: 1px solid rgba(190, 216, 132, 0.4);
             background: white;
+        }
+
+        td.ocupado {
+            padding: 4px 3px;
         }
 
         td.hora {
@@ -313,6 +372,7 @@
             padding: 8px;
             text-align: center;
             vertical-align: middle;
+            width: 70px;
         }
 
         body.modo-diurno td.hora {
@@ -702,8 +762,20 @@
                 min-width: 100%;
             }
 
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                padding: 12px;
+            }
+
+            /* La tabla mantiene ancho mínimo para poder hacer scroll horizontal */
+            table {
+                min-width: 520px;
+            }
+
             td {
-                min-width: 80px;
                 font-size: 11px;
             }
         }
@@ -713,15 +785,32 @@
             font-size: 11px;
         }
 
-        .mobile-view td {
-            min-width: 70px;
-            padding: 6px 4px;
-            height: 30px;
-        }
-
         .mobile-view th {
             padding: 10px 6px;
             font-size: 12px;
+        }
+
+        .mobile-view td {
+            min-width: 70px;
+            height: 37px;
+            vertical-align: middle;
+        }
+
+        .mobile-view td.hora {
+            padding: 8px 4px;
+        }
+
+        /* En mobile los nombres se muestran completos, sin límite de líneas */
+        .mobile-view .block-time {
+            font-size: 9px;
+        }
+
+        .mobile-view .block-name {
+            font-size: 10px;
+            -webkit-line-clamp: unset;
+            display: block;
+            white-space: normal;
+            word-break: break-word;
         }
 
         .mobile-view .header h1 {
@@ -780,11 +869,7 @@
                     <input type="checkbox" id="vistaMobile">
                     <span>Vista mobile</span>
                 </label>
-
-                <label class="checkbox-item">
-                    <input type="checkbox" id="agruparConsecutivos">
-                    <span>Agrupar consecutivos</span>
-                </label>
+            </div>
                 
                 <button class="theme-toggle" id="themeToggle">
                     <span class="theme-toggle-icon">☀️</span>
@@ -20477,17 +20562,10 @@
             if (!selectedSala && !mostrarGrupo) {
                 legend.style.display = 'none';
                 tableContainer.innerHTML = `
-                    <div style="
-                        color: white; 
-                        padding: 60px 20px; 
-                        text-align: center;
-                        background: rgba(45, 55, 72, 0.3);
-                        border-radius: 8px;
-                        border: 2px dashed rgba(255, 255, 255, 0.2);
-                    ">
+                    <div class="empty-state">
                         <div style="font-size: 48px; margin-bottom: 20px; opacity: 0.5;">📅</div>
-                        <h3 style="margin-bottom: 10px; font-size: 18px;">Bienvenido al Sistema de Gestión de Salas</h3>
-                        <p style="color: #cbd5e0; font-size: 14px;">
+                        <h3>Bienvenido al Sistema de Gestión de Salas</h3>
+                        <p>
                             Selecciona una sala del menú desplegable o usa "Mostrar" para ver grupos de salas
                         </p>
                     </div>
@@ -20512,6 +20590,55 @@
             } else {
                 renderTablaUnica(currentFilteredData, fechas, horas, resaltarOcupadas);
             }
+        }
+
+        // Genera la lista completa de slots de 30 min: 08:00, 08:30, ..., 17:30
+        function generateAllSlots() {
+            const slots = [];
+            for (let h = 8; h <= 17; h++) {
+                slots.push(`${String(h).padStart(2,'0')}:00`);
+                slots.push(`${String(h).padStart(2,'0')}:30`);
+            }
+            return slots; // 20 slots
+        }
+
+        // Calcula sesiones fusionadas para una columna (fecha)
+        // Retorna array: { slot, span, isOcupado, subject, timeLabel }
+        function computeSessions(datos, fecha) {
+            const allSlots = generateAllSlots();
+            const sessions = [];
+            let i = 0;
+            while (i < allSlots.length) {
+                const slot = allSlots[i];
+                const dato = datos.find(d => d.Fecha === fecha && d.HoraInicio.startsWith(slot));
+                const isOcupado = dato && dato.OcupadoFlag === "1";
+                const subject = isOcupado ? (dato.Subject || 'Ocupado') : null;
+
+                if (isOcupado && subject) {
+                    // Buscar bloques consecutivos con el mismo nombre
+                    let j = i + 1;
+                    while (j < allSlots.length) {
+                        const nextDato = datos.find(d => d.Fecha === fecha && d.HoraInicio.startsWith(allSlots[j]));
+                        const nextIsOcupado = nextDato && nextDato.OcupadoFlag === "1";
+                        const nextSubject = nextIsOcupado ? (nextDato.Subject || 'Ocupado') : null;
+                        if (nextSubject === subject) j++;
+                        else break;
+                    }
+                    const span = j - i;
+                    // Calcular hora de fin (último slot + 30 min)
+                    const [lh, lm] = allSlots[j - 1].split(':').map(Number);
+                    const endMin = lh * 60 + lm + 30;
+                    const endH = String(Math.floor(endMin / 60)).padStart(2, '0');
+                    const endM = String(endMin % 60).padStart(2, '0');
+                    const timeLabel = `${slot} - ${endH}:${endM}`;
+                    sessions.push({ slot, span, isOcupado: true, subject, timeLabel });
+                    i = j;
+                } else {
+                    sessions.push({ slot, span: 1, isOcupado: false, subject: null, timeLabel: slot });
+                    i++;
+                }
+            }
+            return sessions;
         }
 
         function renderTablaUnica(filteredData, fechas, horas, resaltarOcupadas) {
@@ -20595,100 +20722,56 @@
             
             html += '</tr></thead><tbody>';
             
-            horas.forEach(hora => {
+            // Pre-computar sesiones fusionadas por columna (fecha)
+            const allSlots = generateAllSlots();
+            const sessionsByFecha = {};
+            fechas.forEach(fecha => {
+                sessionsByFecha[fecha] = computeSessions(datosFiltradosHorario, fecha);
+            });
+
+            // Cursores y "filas pendientes de skip" por columna
+            const sessionCursors = {};
+            const skipRemaining = {};
+            fechas.forEach(f => { sessionCursors[f] = 0; skipRemaining[f] = 0; });
+
+            allSlots.forEach(slot => {
                 html += '<tr>';
-                
-                // Mostrar solo la hora (08:00, 09:00) en vista por hora
-                const horaDisplay = vistaPorHora ? hora.substring(0, 5) : hora;
-                html += `<td class="hora">${horaDisplay}</td>`;
-                
+
+                // Columna Hora: rowspan=2 solo en slots :00
+                const slotMin = parseInt(slot.split(':')[1], 10);
+                if (slotMin === 0) {
+                    html += `<td class="hora" rowspan="2">${slot}</td>`;
+                }
+
+                // Columnas de datos
                 fechas.forEach(fecha => {
-                    if (vistaPorHora) {
-                        // Vista por hora: crear mini-bloques de 30 minutos
-                        const [horaBase] = hora.split(':');
-                        
-                        // Obtener datos para :00 y :30
-                        const dato00 = datosFiltradosHorario.find(item => 
-                            item.Fecha === fecha && item.HoraInicio.startsWith(`${horaBase}:00`)
-                        );
-                        const dato30 = datosFiltradosHorario.find(item => 
-                            item.Fecha === fecha && item.HoraInicio.startsWith(`${horaBase}:30`)
-                        );
-                        
-                        html += '<td style="padding: 0;"><div class="hour-cell-container">';
-                        
-                        // Bloque 1 (:00)
-                        if (dato00) {
-                            const isOcupado = dato00.OcupadoFlag === "1";
-                            const className = isOcupado ? 'ocupado' : 'libre';
-                            const opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
-                            const content = isOcupado ? (dato00.Subject || 'Ocupado') : '';
-                            const title = dato00.Subject || '';
-                            
-                            html += `<div class="half-hour-block ${className}" style="opacity: ${opacity}" title="${title}">`;
-                            html += `<div class="half-hour-time">${horaBase}:00</div>`;
-                            html += `<div class="half-hour-content">${content}</div>`;
-                            html += '</div>';
-                        } else {
-                            const opacity = resaltarOcupadas ? '0.3' : '1';
-                            html += `<div class="half-hour-block libre" style="opacity: ${opacity}">`;
-                            html += `<div class="half-hour-time">${horaBase}:00</div>`;
-                            html += '<div class="half-hour-content"></div>';
-                            html += '</div>';
-                        }
-                        
-                        // Bloque 2 (:30)
-                        if (dato30) {
-                            const isOcupado = dato30.OcupadoFlag === "1";
-                            const className = isOcupado ? 'ocupado' : 'libre';
-                            const opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
-                            const content = isOcupado ? (dato30.Subject || 'Ocupado') : '';
-                            const title = dato30.Subject || '';
-                            
-                            html += `<div class="half-hour-block ${className}" style="opacity: ${opacity}" title="${title}">`;
-                            html += `<div class="half-hour-time">${horaBase}:30</div>`;
-                            html += `<div class="half-hour-content">${content}</div>`;
-                            html += '</div>';
-                        } else {
-                            const opacity = resaltarOcupadas ? '0.3' : '1';
-                            html += `<div class="half-hour-block libre" style="opacity: ${opacity}">`;
-                            html += `<div class="half-hour-time">${horaBase}:30</div>`;
-                            html += '<div class="half-hour-content"></div>';
-                            html += '</div>';
-                        }
-                        
-                        html += '</div></td>';
-                        
+                    if (skipRemaining[fecha] > 0) {
+                        skipRemaining[fecha]--;
+                        return; // cubierta por rowspan anterior
+                    }
+                    const sessions = sessionsByFecha[fecha];
+                    const idx = sessionCursors[fecha];
+                    if (idx >= sessions.length) return;
+
+                    const sess = sessions[idx];
+                    sessionCursors[fecha]++;
+
+                    if (sess.isOcupado) {
+                        skipRemaining[fecha] = sess.span - 1;
+                        html += `<td class="ocupado" rowspan="${sess.span}" title="${sess.subject}">`;
+                        html += `<div class="block-time">${sess.timeLabel}</div>`;
+                        html += `<div class="block-name">${sess.subject}</div>`;
+                        html += `</td>`;
                     } else {
-                        // Vista normal (cada 15 minutos)
-                        const datos = obtenerDatosParaHora(datosFiltradosHorario, hora, fecha);
-                        
-                        if (datos.length > 0) {
-                            const dato = datos[0];
-                            const isOcupado = dato.OcupadoFlag === "1";
-                            const className = isOcupado ? 'ocupado tooltip' : 'libre tooltip';
-                            const subject = dato.Subject || (isOcupado ? 'Ocupado' : '');
-                            const opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
-                            
-                            html += `<td class="${className}" data-subject="${subject}" style="opacity: ${opacity}"></td>`;
-                        } else {
-                            const opacity = resaltarOcupadas ? '0.3' : '1';
-                            html += `<td class="libre" style="opacity: ${opacity}"></td>`;
-                        }
+                        html += `<td class="libre"></td>`;
                     }
                 });
-                
+
                 html += '</tr>';
             });
             
             html += '</tbody></table></div>';
             tableContainer.innerHTML = html;
-            
-            // Marcar bloques consecutivos solo si está activado
-            if (document.getElementById('agruparConsecutivos').checked) {
-                const table = tableContainer.querySelector('table');
-                if (table) marcarGruposConsecutivos(table, fechas.length);
-            }
         }
         
         // --- Helpers para grupos en "Mostrar Todo" ---
@@ -20915,161 +20998,70 @@
                 
                 thead.appendChild(headerRow);
                 
-                horas.forEach(hora => {
+                // Pre-computar sesiones fusionadas por columna (fecha)
+                const allSlots = generateAllSlots();
+                const sessionsByFecha = {};
+                fechas.forEach(fecha => {
+                    sessionsByFecha[fecha] = computeSessions(datosSala, fecha);
+                });
+
+                const sessionCursors = {};
+                const skipRemaining = {};
+                fechas.forEach(f => { sessionCursors[f] = 0; skipRemaining[f] = 0; });
+
+                allSlots.forEach(slot => {
                     const row = document.createElement('tr');
-                    
-                    const horaCell = document.createElement('td');
-                    horaCell.className = 'hora';
-                    const horaDisplay = vistaPorHora ? hora.substring(0, 5) : hora;
-                    horaCell.textContent = horaDisplay;
-                    row.appendChild(horaCell);
-                    
+                    const slotMin = parseInt(slot.split(':')[1], 10);
+
+                    // Celda de hora: solo en slots :00, rowspan=2
+                    if (slotMin === 0) {
+                        const horaCell = document.createElement('td');
+                        horaCell.className = 'hora';
+                        horaCell.setAttribute('rowspan', '2');
+                        horaCell.textContent = slot;
+                        row.appendChild(horaCell);
+                    }
+
+                    // Columnas de datos
                     fechas.forEach(fecha => {
-                        const cell = document.createElement('td');
-                        
-                        if (vistaPorHora) {
-                            // Vista por hora: crear mini-bloques de 30 minutos
-                            cell.style.padding = '0';
-                            
-                            const [horaBase] = hora.split(':');
-                            
-                            // Obtener datos para :00 y :30
-                            const dato00 = datosSala.find(item => 
-                                item.Fecha === fecha && item.HoraInicio.startsWith(`${horaBase}:00`)
-                            );
-                            const dato30 = datosSala.find(item => 
-                                item.Fecha === fecha && item.HoraInicio.startsWith(`${horaBase}:30`)
-                            );
-                            
-                            const container = document.createElement('div');
-                            container.className = 'hour-cell-container';
-                            
-                            // Primer bloque (XX:00)
-                            const block1 = document.createElement('div');
-                            block1.className = 'half-hour-block';
-                            
-                            if (dato00) {
-                                const isOcupado = dato00.OcupadoFlag === "1";
-                                block1.classList.add(isOcupado ? 'ocupado' : 'libre');
-                                block1.style.opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
-                                
-                                const timeLabel = document.createElement('div');
-                                timeLabel.className = 'half-hour-time';
-                                timeLabel.textContent = `${horaBase}:00`;
-                                block1.appendChild(timeLabel);
-                                
-                                if (isOcupado && dato00.Subject) {
-                                    const content = document.createElement('div');
-                                    content.className = 'half-hour-content';
-                                    content.textContent = dato00.Subject;
-                                    content.title = dato00.Subject;
-                                    block1.appendChild(content);
-                                } else if (isOcupado) {
-                                    const content = document.createElement('div');
-                                    content.className = 'half-hour-content';
-                                    content.textContent = 'Ocupado';
-                                    block1.appendChild(content);
-                                } else {
-                                    const content = document.createElement('div');
-                                    content.className = 'half-hour-content';
-                                    content.textContent = '';
-                                    block1.appendChild(content);
-                                }
-                            } else {
-                                block1.classList.add('libre');
-                                block1.style.opacity = resaltarOcupadas ? '0.3' : '1';
-                                
-                                const timeLabel = document.createElement('div');
-                                timeLabel.className = 'half-hour-time';
-                                timeLabel.textContent = `${horaBase}:00`;
-                                block1.appendChild(timeLabel);
-                                
-                                const content = document.createElement('div');
-                                content.className = 'half-hour-content';
-                                content.textContent = '';
-                                block1.appendChild(content);
-                            }
-                            
-                            // Segundo bloque (XX:30)
-                            const block2 = document.createElement('div');
-                            block2.className = 'half-hour-block';
-                            
-                            if (dato30) {
-                                const isOcupado = dato30.OcupadoFlag === "1";
-                                block2.classList.add(isOcupado ? 'ocupado' : 'libre');
-                                block2.style.opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
-                                
-                                const timeLabel = document.createElement('div');
-                                timeLabel.className = 'half-hour-time';
-                                timeLabel.textContent = `${horaBase}:30`;
-                                block2.appendChild(timeLabel);
-                                
-                                if (isOcupado && dato30.Subject) {
-                                    const content = document.createElement('div');
-                                    content.className = 'half-hour-content';
-                                    content.textContent = dato30.Subject;
-                                    content.title = dato30.Subject;
-                                    block2.appendChild(content);
-                                } else if (isOcupado) {
-                                    const content = document.createElement('div');
-                                    content.className = 'half-hour-content';
-                                    content.textContent = 'Ocupado';
-                                    block2.appendChild(content);
-                                } else {
-                                    const content = document.createElement('div');
-                                    content.className = 'half-hour-content';
-                                    content.textContent = '';
-                                    block2.appendChild(content);
-                                }
-                            } else {
-                                block2.classList.add('libre');
-                                block2.style.opacity = resaltarOcupadas ? '0.3' : '1';
-                                
-                                const timeLabel = document.createElement('div');
-                                timeLabel.className = 'half-hour-time';
-                                timeLabel.textContent = `${horaBase}:30`;
-                                block2.appendChild(timeLabel);
-                                
-                                const content = document.createElement('div');
-                                content.className = 'half-hour-content';
-                                content.textContent = '';
-                                block2.appendChild(content);
-                            }
-                            
-                            container.appendChild(block1);
-                            container.appendChild(block2);
-                            cell.appendChild(container);
-                            
-                        } else {
-                            // Vista normal (cada 15 minutos)
-                            const datos = obtenerDatosParaHora(datosSala, hora, fecha);
-                            
-                            if (datos.length > 0) {
-                                const dato = datos[0];
-                                const isOcupado = dato.OcupadoFlag === "1";
-                                
-                                cell.className = isOcupado ? 'ocupado tooltip' : 'libre tooltip';
-                                cell.setAttribute('data-subject', dato.Subject || (isOcupado ? 'Ocupado' : ''));
-                                cell.style.opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
-                            } else {
-                                cell.className = 'libre';
-                                cell.style.opacity = resaltarOcupadas ? '0.3' : '1';
-                            }
+                        if (skipRemaining[fecha] > 0) {
+                            skipRemaining[fecha]--;
+                            return;
                         }
-                        
+                        const sessions = sessionsByFecha[fecha];
+                        const idx = sessionCursors[fecha];
+                        if (idx >= sessions.length) return;
+
+                        const sess = sessions[idx];
+                        sessionCursors[fecha]++;
+
+                        const cell = document.createElement('td');
+                        if (sess.isOcupado) {
+                            skipRemaining[fecha] = sess.span - 1;
+                            cell.className = 'ocupado';
+                            cell.setAttribute('rowspan', sess.span);
+                            cell.title = sess.subject;
+
+                            const timeDiv = document.createElement('div');
+                            timeDiv.className = 'block-time';
+                            timeDiv.textContent = sess.timeLabel;
+                            cell.appendChild(timeDiv);
+
+                            const nameDiv = document.createElement('div');
+                            nameDiv.className = 'block-name';
+                            nameDiv.textContent = sess.subject;
+                            cell.appendChild(nameDiv);
+                        } else {
+                            cell.className = 'libre';
+                        }
                         row.appendChild(cell);
                     });
-                    
+
                     tbody.appendChild(row);
                 });
                 
                 table.appendChild(thead);
                 table.appendChild(tbody);
-                
-                // Marcar bloques consecutivos solo si está activado
-                if (document.getElementById('agruparConsecutivos').checked) {
-                    marcarGruposConsecutivos(table, fechas.length);
-                }
 
                 salaContainer.appendChild(salaTitle);
                 salaContainer.appendChild(table);
@@ -21194,10 +21186,6 @@
             filterData();
         });
         
-        document.getElementById('agruparConsecutivos').addEventListener('change', function() {
-            renderTable();
-        });
-
         document.getElementById('vistaMobile').addEventListener('change', function() {
             const container = document.querySelector('.container');
             
