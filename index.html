@@ -294,26 +294,27 @@
             transition: all 0.2s ease;
             cursor: pointer;
             min-width: 120px;
-            height: 37px;
+            height: 26px;
             vertical-align: middle;
         }
 
         /* Contenido dentro de celda ocupada fusionada */
         .block-time {
-            font-size: 10px;
+            font-size: 9px;
             opacity: 0.78;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             white-space: nowrap;
+            line-height: 1.2;
         }
 
         .block-name {
             font-size: 11px;
             font-weight: 600;
-            line-height: 1.3;
+            line-height: 1.25;
             overflow: hidden;
             display: -webkit-box;
             -webkit-box-orient: vertical;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 3;
             word-break: break-word;
             padding: 0 3px;
         }
@@ -321,6 +322,10 @@
         body.modo-diurno td {
             border: 1px solid rgba(190, 216, 132, 0.4);
             background: white;
+        }
+
+        td.ocupado {
+            padding: 4px 3px;
         }
 
         td.hora {
@@ -741,7 +746,7 @@
 
         .mobile-view td {
             min-width: 70px;
-            height: 32px;
+            height: 28px;
             vertical-align: middle;
         }
 
