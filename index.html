@@ -21,7 +21,7 @@
 
         /* Modo Diurno - Colores Pantone */
         body.modo-diurno {
-            background: #e8edf2;
+            background: #ffffff;
         }
 
         .container {
@@ -188,6 +188,7 @@
             background: rgba(45, 55, 72, 0.7);
             padding: 15px;
             border-radius: 8px;
+            margin-top: 8px;
             margin-bottom: 20px;
             color: white;
             transition: all 0.3s ease;
@@ -218,7 +219,8 @@
             display: flex;
             gap: 20px;
             justify-content: flex-end;
-            margin-bottom: 15px;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
 
         .legend-item {
@@ -834,11 +836,6 @@
             </div>
         </div>
 
-        <div id="summary" class="summary" style="display: none;">
-            <div class="summary-title" id="summaryTitle"></div>
-            <div class="summary-stats" id="summaryStats"></div>
-        </div>
-
         <div class="legend">
             <div class="legend-item">
                 <div class="legend-color libre"></div>
@@ -848,6 +845,11 @@
                 <div class="legend-color ocupado"></div>
                 <span>Ocupado</span>
             </div>
+        </div>
+
+        <div id="summary" class="summary" style="display: none;">
+            <div class="summary-title" id="summaryTitle"></div>
+            <div class="summary-stats" id="summaryStats"></div>
         </div>
 
         <div class="table-container"></div>
