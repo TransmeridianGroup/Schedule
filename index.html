@@ -16,6 +16,12 @@
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             padding: 20px;
             min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+
+        /* Modo Diurno - Colores Pantone */
+        body.modo-diurno {
+            background: #FFFFFF;
         }
 
         .container {
@@ -25,6 +31,12 @@
             border-radius: 12px;
             padding: 25px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.modo-diurno .container {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         /* Sección del logo */
@@ -72,6 +84,11 @@
         .header {
             color: white;
             margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        body.modo-diurno .header {
+            color: #2d3748;
         }
 
         .header h1 {
@@ -82,6 +99,10 @@
         .header .subtitle {
             font-size: 13px;
             color: #a0aec0;
+        }
+
+        body.modo-diurno .header .subtitle {
+            color: #718096;
         }
 
         .controls {
@@ -102,6 +123,11 @@
             color: #cbd5e0;
             font-size: 13px;
             font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        body.modo-diurno .control-group label {
+            color: #4a5568;
         }
 
         select {
@@ -113,11 +139,23 @@
             font-size: 14px;
             min-width: 250px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.modo-diurno select {
+            background: white;
+            border: 1px solid #BED884;
+            color: #2d3748;
         }
 
         select:focus {
             outline: none;
             border-color: #4299e1;
+        }
+
+        body.modo-diurno select:focus {
+            border-color: #BED884;
+            box-shadow: 0 0 0 3px rgba(190, 216, 132, 0.2);
         }
 
         .checkbox-group {
@@ -133,6 +171,11 @@
             color: #cbd5e0;
             font-size: 13px;
             cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        body.modo-diurno .checkbox-item {
+            color: #4a5568;
         }
 
         .checkbox-item input[type="checkbox"] {
@@ -147,6 +190,13 @@
             border-radius: 8px;
             margin-bottom: 20px;
             color: white;
+            transition: all 0.3s ease;
+        }
+
+        body.modo-diurno .summary {
+            background: rgba(190, 216, 132, 0.2);
+            border: 1px solid #BED884;
+            color: #2d3748;
         }
 
         .summary-title {
@@ -158,6 +208,10 @@
         .summary-stats {
             font-size: 13px;
             color: #cbd5e0;
+        }
+
+        body.modo-diurno .summary-stats {
+            color: #4a5568;
         }
 
         .legend {
@@ -173,6 +227,11 @@
             gap: 8px;
             font-size: 13px;
             color: #cbd5e0;
+            transition: color 0.3s ease;
+        }
+
+        body.modo-diurno .legend-item {
+            color: #4a5568;
         }
 
         .legend-color {
@@ -182,18 +241,14 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .legend-color.libre {
-            background: linear-gradient(135deg, #2d5f5d 0%, #1a4645 100%);
-        }
-
-        .legend-color.ocupado {
-            background: linear-gradient(135deg, #5d2d3d 0%, #4a1f2f 100%);
-        }
-
         .table-container {
             overflow-x: auto;
             border-radius: 8px;
             background: rgba(26, 32, 44, 0.5);
+        }
+
+        body.modo-diurno .table-container {
+            background: #FFFFFF;
         }
 
         table {
@@ -212,6 +267,13 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        body.modo-diurno th {
+            background: linear-gradient(135deg, #BED884 0%, #A8C76F 100%);
+            color: #2d3748;
+            border: 1px solid rgba(190, 216, 132, 0.5);
         }
 
         th.hora-header {
@@ -220,33 +282,318 @@
             min-width: 60px;
         }
 
+        body.modo-diurno th.hora-header {
+            background: linear-gradient(135deg, #FFDF8C 0%, #F5D775 100%);
+            color: #2d3748;
+        }
+
         td {
-            padding: 8px;
+            padding: 0;
             text-align: center;
             border: 1px solid rgba(74, 85, 104, 0.3);
             transition: all 0.2s ease;
             cursor: pointer;
             min-width: 120px;
-            height: 35px;
+            height: 74px;
+        }
+
+        body.modo-diurno td {
+            border: 1px solid rgba(190, 216, 132, 0.4);
+            background: white;
         }
 
         td.hora {
             background: rgba(30, 40, 60, 0.8);
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             position: sticky;
             left: 0;
             z-index: 5;
+            transition: all 0.3s ease;
+            padding: 8px;
+            text-align: center;
+            vertical-align: middle;
         }
 
-        td.libre {
+        body.modo-diurno td.hora {
+            background: linear-gradient(135deg, #FFDF8C 0%, #F5D775 100%);
+            color: #2d3748;
+        }
+
+        /* Modo Diurno (por defecto) */
+        body.modo-diurno td.libre {
+            background: #D8D8D8;
+            border: 1px solid rgba(180, 180, 180, 0.5);
+            color: transparent;
+        }
+
+        body.modo-diurno td.ocupado {
+            background: #DBB893;
+            border: 1px solid rgba(201, 167, 126, 0.5);
+            color: #2d3748;
+            font-weight: 700;
+        }
+
+        body.modo-diurno .half-hour-block.libre {
+            background: #D8D8D8;
+        }
+
+        body.modo-diurno .half-hour-block.libre .half-hour-time,
+        body.modo-diurno .half-hour-block.libre .half-hour-content {
+            display: none;
+        }
+
+        body.modo-diurno .half-hour-block.ocupado {
+            background: #DBB893;
+            color: #2d3748;
+            font-weight: 700;
+        }
+
+        body.modo-diurno .legend-color.libre {
+            background: #D8D8D8;
+            border: 1px solid rgba(180, 180, 180, 0.8);
+        }
+
+        body.modo-diurno .legend-color.ocupado {
+            background: #DBB893;
+            border: 1px solid rgba(201, 167, 126, 0.8);
+        }
+
+        /* Modo Nocturno */
+        body.modo-nocturno td.libre {
             background: linear-gradient(135deg, #2d5f5d 0%, #1a4645 100%);
             border: 1px solid rgba(45, 95, 93, 0.5);
+            color: transparent;
         }
 
-        td.ocupado {
+        body.modo-nocturno td.ocupado {
             background: linear-gradient(135deg, #5d2d3d 0%, #4a1f2f 100%);
             border: 1px solid rgba(93, 45, 61, 0.5);
+            color: white;
+            font-weight: 700;
+        }
+
+        body.modo-nocturno .half-hour-block.libre {
+            background: linear-gradient(135deg, #2d5f5d 0%, #1a4645 100%);
+            color: transparent;
+        }
+
+        body.modo-nocturno .half-hour-block.ocupado {
+            background: linear-gradient(135deg, #5d2d3d 0%, #4a1f2f 100%);
+            color: white;
+            font-weight: 700;
+        }
+
+        body.modo-nocturno .legend-color.libre {
+            background: linear-gradient(135deg, #2d5f5d 0%, #1a4645 100%);
+            border: 1px solid rgba(45, 95, 93, 0.8);
+        }
+
+        body.modo-nocturno .legend-color.ocupado {
+            background: linear-gradient(135deg, #5d2d3d 0%, #4a1f2f 100%);
+            border: 1px solid rgba(93, 45, 61, 0.8);
+        }
+
+        /* Botón toggle modo */
+        .theme-toggle {
+            background: rgba(45, 55, 72, 0.7);
+            border: 1px solid rgba(74, 85, 104, 0.5);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.modo-diurno .theme-toggle {
+            background: linear-gradient(135deg, #BED884 0%, #A8C76F 100%);
+            border: 1px solid #BED884;
+            color: #2d3748;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(45, 55, 72, 0.9);
+            transform: translateY(-1px);
+        }
+
+        body.modo-diurno .theme-toggle:hover {
+            background: linear-gradient(135deg, #A8C76F 0%, #98B75F 100%);
+        }
+
+        .theme-toggle-icon {
+            font-size: 16px;
+        }
+
+        /* Estilos para título de sala */
+        .sala-title-header {
+            background: rgba(45, 55, 72, 0.9);
+            padding: 12px 20px;
+            border-radius: 8px 8px 0 0;
+            color: white;
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.modo-diurno .sala-title-header {
+            background: linear-gradient(135deg, #BED884 0%, #A8C76F 100%);
+            color: #2d3748;
+        }
+
+        .sala-stats {
+            font-size: 13px;
+            font-weight: normal;
+            color: #cbd5e0;
+        }
+
+        body.modo-diurno .sala-stats {
+            color: #4a5568;
+        }
+
+        /* Colores de estadísticas modo nocturno */
+        .stat-ocupado { color: #DBB893; }
+        .stat-libre   { color: #EFEFEF; }
+
+        /* Colores de estadísticas modo diurno */
+        body.modo-diurno .stat-ocupado { color: #7a4f2d; }
+        body.modo-diurno .stat-libre   { color: #2d6b0e; }
+
+        /* Estilos para mini-bloques de 30 minutos en vista por hora */
+        .hour-cell-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            padding: 0;
+            width: 100%;
+            height: 74px;
+        }
+
+        .half-hour-block {
+            height: 37px;
+            flex: none;
+            padding: 3px 6px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            border: none;
+            border-bottom: 1px solid rgba(74, 85, 104, 0.2);
+            transition: background 0.2s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        body.modo-diurno .half-hour-block {
+            border-bottom: 1px solid rgba(190, 216, 132, 0.3);
+        }
+
+        /* Cuando solo hay un bloque (08:30 o 17:30), que ocupe los 74px completos */
+        .hour-cell-container:has(.half-hour-block:only-child) .half-hour-block {
+            height: 74px;
+        }
+
+        .half-hour-block:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+
+        /* Bordes de bloques consecutivos con el mismo nombre */
+        .half-hour-block.group-top {
+            border-top: 2.5px solid #F6AD55 !important;
+            border-left: 2.5px solid #F6AD55 !important;
+            border-right: 2.5px solid #F6AD55 !important;
+            border-bottom: none !important;
+            border-radius: 5px 5px 0 0;
+        }
+        .half-hour-block.group-mid {
+            border-top: none !important;
+            border-left: 2.5px solid #F6AD55 !important;
+            border-right: 2.5px solid #F6AD55 !important;
+            border-bottom: none !important;
+            border-radius: 0;
+        }
+        .half-hour-block.group-bottom {
+            border-top: none !important;
+            border-left: 2.5px solid #F6AD55 !important;
+            border-right: 2.5px solid #F6AD55 !important;
+            border-bottom: 2.5px solid #F6AD55 !important;
+            border-radius: 0 0 5px 5px;
+        }
+
+        /* Modo diurno: border más oscuro */
+        body.modo-diurno .half-hour-block.group-top,
+        body.modo-diurno .half-hour-block.group-mid,
+        body.modo-diurno .half-hour-block.group-bottom {
+            border-color: #C05621 !important;
+        }
+
+        /* Resumen de grupo inline (en Mostrar Todo) */
+        .grupo-summary {
+            margin-bottom: 16px;
+            margin-top: 8px;
+        }
+        .grupo-summary .summary-title {
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .grupo-separador {
+            height: 2px;
+            background: linear-gradient(90deg, #BED884, transparent);
+            margin: 24px 0 16px 0;
+            border-radius: 2px;
+        }
+        body.modo-nocturno .grupo-separador {
+            background: linear-gradient(90deg, rgba(190,216,132,0.4), transparent);
+        }
+
+        .half-hour-time {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        /* Modo diurno: hora en negro en bloques ocupados */
+        body.modo-diurno .half-hour-block.ocupado .half-hour-time {
+            color: #2d3748;
+        }
+
+        /* Modo diurno: bloques libres completamente vacíos */
+        body.modo-diurno .half-hour-block.libre .half-hour-time,
+        body.modo-diurno .half-hour-block.libre .half-hour-content {
+            display: none;
+        }
+
+        /* Modo nocturno: bloques libres completamente vacíos */
+        body.modo-nocturno .half-hour-block.libre .half-hour-time,
+        body.modo-nocturno .half-hour-block.libre .half-hour-content {
+            display: none;
+        }
+
+        .half-hour-content {
+            font-size: 10px;
+            font-weight: 700;
+            text-align: center;
+            word-break: break-word;
+            max-width: 100%;
+            overflow: hidden;
+            white-space: normal;
+            line-height: 1.2;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
         td.libre:hover, td.ocupado:hover {
@@ -390,7 +737,7 @@
         }
     </style>
 </head>
-<body>
+<body class="modo-diurno">
     <div class="container">
         <!-- Logo Header -->
         <div class="logo-header">
@@ -418,26 +765,31 @@
                 </select>
             </div>
 
+            <div class="control-group">
+                <label for="mostrarGrupo">Mostrar:</label>
+                <select id="mostrarGrupo">
+                    <option value="">-- Mostrar --</option>
+                    <option value="salas">Mostrar Salas</option>
+                    <option value="cabinas">Mostrar Cabinas</option>
+                    <option value="todo">Mostrar Todo</option>
+                </select>
+            </div>
+                
             <div class="checkbox-group">
-                <label class="checkbox-item">
-                    <input type="checkbox" id="mostrarTodas">
-                    <span>Mostrar todas las salas (apiladas)</span>
-                </label>
-                
-                <label class="checkbox-item">
-                    <input type="checkbox" id="resaltarOcupadas">
-                    <span>Resaltar solo ocupadas</span>
-                </label>
-                
-                <label class="checkbox-item">
-                    <input type="checkbox" id="vistaPorHora" checked>
-                    <span>Vista por hora</span>
-                </label>
-                
                 <label class="checkbox-item">
                     <input type="checkbox" id="vistaMobile">
                     <span>Vista mobile</span>
                 </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" id="agruparConsecutivos">
+                    <span>Agrupar consecutivos</span>
+                </label>
+                
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="theme-toggle-icon">☀️</span>
+                    <span>Modo Nocturno</span>
+                </button>
             </div>
         </div>
 
@@ -488,6 +840,21 @@
                 return hora + ':00';
             }
             return hora;
+        }
+
+        // Función para verificar si una hora está en el rango de horario laboral (8:30 - 17:30)
+        function estaEnRangoHorario(horaInicio) {
+            // Extraer hora y minutos (formato puede ser HH:MM o HH:MM:SS)
+            const partes = horaInicio.split(':');
+            const hora = parseInt(partes[0]);
+            const minuto = parseInt(partes[1]);
+            const horaEnMinutos = hora * 60 + minuto;
+            
+            // Rango: 08:30 (510 minutos) a 17:30 (1050 minutos)
+            const inicioRango = 8 * 60 + 30; // 08:30 = 510 minutos
+            const finRango = 17 * 60 + 30;   // 17:30 = 1050 minutos
+            
+            return horaEnMinutos >= inicioRango && horaEnMinutos <= finRango;
         }
 
         // DATOS JSON EMBEBIDOS - El script Python actualizará esta sección
@@ -20022,19 +20389,25 @@
 
         function filterData() {
             const selectedSala = document.getElementById('salaSelect').value;
-            const mostrarTodas = document.getElementById('mostrarTodas').checked;
+            const mostrarGrupo = document.getElementById('mostrarGrupo').value;
             
+            // Filtrar solo por días laborales (no fines de semana)
             let filtered = currentData.filter(item => {
-                if (item.HoraInicio < HORA_INICIO || item.HoraInicio > HORA_FIN) {
-                    return false;
-                }
-                
                 const date = new Date(item.Fecha + 'T00:00:00');
                 const dayOfWeek = date.getUTCDay();
                 return dayOfWeek !== 0 && dayOfWeek !== 6;
             });
             
-            if (selectedSala && !mostrarTodas) {
+            // Filtrar según la selección del grupo o sala individual
+            if (mostrarGrupo === 'salas') {
+                filtered = filtered.filter(item => 
+                    item.SalaNombre.includes('SALA') || item.SalaNombre.includes('Directorio')
+                );
+            } else if (mostrarGrupo === 'cabinas') {
+                filtered = filtered.filter(item => item.SalaNombre.includes('Cabina'));
+            } else if (mostrarGrupo === 'todo') {
+                // no filtro adicional, mostrar todo
+            } else if (selectedSala) {
                 filtered = filtered.filter(item => item.SalaNombre === selectedSala);
             }
             
@@ -20044,19 +20417,33 @@
         }
 
         function obtenerHorasAMostrar(horas) {
-            const vistaPorHora = document.getElementById('vistaPorHora').checked;
+            const vistaPorHora = true;
             
             if (!vistaPorHora) {
-                // Mostrar todos los intervalos de 15 minutos
-                return horas;
+                // Vista de 15 minutos: mostrar solo intervalos dentro del rango 08:30 - 17:30
+                return horas.filter(hora => estaEnRangoHorario(hora));
             }
             
-            // Filtrar solo las horas en punto (08:00, 09:00, etc.)
-            return horas.filter(hora => hora.endsWith(':00:00'));
+            // Vista por hora: Necesitamos incluir 08:00 y 17:00 para mostrar bloques de 08:30 y 17:30
+            const horasEnPunto = horas.filter(hora => hora.endsWith(':00:00'));
+            
+            // Asegurarnos de incluir las horas necesarias para el rango 8:30 - 17:30
+            const horasNecesarias = [];
+            horasEnPunto.forEach(hora => {
+                const [h] = hora.split(':');
+                const horaNum = parseInt(h);
+                
+                // Incluir desde las 08:00 (para mostrar 08:30) hasta las 17:00 (para mostrar 17:30)
+                if (horaNum >= 8 && horaNum <= 17) {
+                    horasNecesarias.push(hora);
+                }
+            });
+            
+            return horasNecesarias;
         }
 
         function obtenerDatosParaHora(filteredData, horaBase, fecha) {
-            const vistaPorHora = document.getElementById('vistaPorHora').checked;
+            const vistaPorHora = true;
             
             if (!vistaPorHora) {
                 // Vista de 15 minutos: retornar datos exactos de esa hora
@@ -20080,14 +20467,14 @@
         }
 
         function renderTable() {
-            const resaltarOcupadas = document.getElementById('resaltarOcupadas').checked;
-            const mostrarTodas = document.getElementById('mostrarTodas').checked;
+            const resaltarOcupadas = false;
+            const mostrarGrupo = document.getElementById('mostrarGrupo').value;
             const selectedSala = document.getElementById('salaSelect').value;
             const tableContainer = document.querySelector('.table-container');
             const legend = document.querySelector('.legend');
             
-            // Si no hay sala seleccionada y no está marcado "Mostrar todas"
-            if (!selectedSala && !mostrarTodas) {
+            // Si no hay sala seleccionada y no hay grupo seleccionado
+            if (!selectedSala && !mostrarGrupo) {
                 legend.style.display = 'none';
                 tableContainer.innerHTML = `
                     <div style="
@@ -20101,7 +20488,7 @@
                         <div style="font-size: 48px; margin-bottom: 20px; opacity: 0.5;">📅</div>
                         <h3 style="margin-bottom: 10px; font-size: 18px;">Bienvenido al Sistema de Gestión de Salas</h3>
                         <p style="color: #cbd5e0; font-size: 14px;">
-                            Selecciona una sala del menú desplegable o marca "Mostrar todas las salas" para comenzar
+                            Selecciona una sala del menú desplegable o usa "Mostrar" para ver grupos de salas
                         </p>
                     </div>
                 `;
@@ -20120,7 +20507,7 @@
             const todasLasHoras = [...new Set(currentFilteredData.map(item => item.HoraInicio))].sort();
             const horas = obtenerHorasAMostrar(todasLasHoras);
 
-            if (mostrarTodas) {
+            if (mostrarGrupo) {
                 renderTablasApiladas(currentFilteredData, fechas, horas, resaltarOcupadas);
             } else {
                 renderTablaUnica(currentFilteredData, fechas, horas, resaltarOcupadas);
@@ -20129,8 +20516,22 @@
 
         function renderTablaUnica(filteredData, fechas, horas, resaltarOcupadas) {
             const tableContainer = document.querySelector('.table-container');
-            const vistaPorHora = document.getElementById('vistaPorHora').checked;
+            const vistaPorHora = true;
             const selectedSala = document.getElementById('salaSelect').value;
+            
+            // Filtrar por rango horario según la vista
+            const datosFiltradosHorario = filteredData.filter(item => {
+                if (vistaPorHora) {
+                    // En vista por hora: incluir 08:00-08:29 para el bloque de 08:30, 
+                    // y 17:00-17:29 para el bloque de 17:30
+                    const [hora, minuto] = item.HoraInicio.split(':').map(Number);
+                    const horaEnMinutos = hora * 60 + minuto;
+                    return horaEnMinutos >= 8 * 60 && horaEnMinutos <= 17 * 60 + 30;
+                } else {
+                    // En vista normal: solo 08:30 - 17:30
+                    return estaEnRangoHorario(item.HoraInicio);
+                }
+            });
             
             // Calcular estadísticas de la sala
             let ocupados, libres, totalSlots, porcentaje;
@@ -20139,7 +20540,7 @@
                 // Agrupar por hora completa
                 const horasCompletas = {};
                 
-                filteredData.forEach(item => {
+                datosFiltradosHorario.forEach(item => {
                     const [hora] = item.HoraInicio.split(':');
                     const horaKey = `${item.Fecha}-${hora}`;
                     
@@ -20158,34 +20559,22 @@
                 porcentaje = ((ocupados / totalSlots) * 100).toFixed(1);
             } else {
                 // Vista de 15 minutos
-                totalSlots = filteredData.length;
-                ocupados = filteredData.filter(item => item.OcupadoFlag === "1").length;
+                totalSlots = datosFiltradosHorario.length;
+                ocupados = datosFiltradosHorario.filter(item => item.OcupadoFlag === "1").length;
                 libres = totalSlots - ocupados;
-                porcentaje = ((ocupados / filteredData.length) * 100).toFixed(1);
+                porcentaje = ((ocupados / datosFiltradosHorario.length) * 100).toFixed(1);
             }
             
             // Crear contenedor con header
             let html = '<div style="margin-bottom: 30px;">';
             
-            // Header con estadísticas (igual que en tablas apiladas)
+            // Header con estadísticas
             html += `
-                <div style="
-                    background: rgba(45, 55, 72, 0.9);
-                    padding: 12px 20px;
-                    border-radius: 8px 8px 0 0;
-                    color: white;
-                    font-weight: 600;
-                    font-size: 15px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    gap: 8px;
-                ">
+                <div class="sala-title-header">
                     <span>${selectedSala}</span>
-                    <span style="font-size: 13px; font-weight: normal; color: #cbd5e0;">
-                        <strong style="color: #fc8181;">${ocupados} ocupadas</strong> • 
-                        <strong style="color: #68d391;">${libres} libres</strong> • 
+                    <span class="sala-stats">
+                        <strong class="stat-ocupado">${ocupados} ocupadas</strong> • 
+                        <strong class="stat-libre">${libres} libres</strong> • 
                         ${porcentaje}% ocupación
                     </span>
                 </div>
@@ -20214,42 +20603,78 @@
                 html += `<td class="hora">${horaDisplay}</td>`;
                 
                 fechas.forEach(fecha => {
-                    const datos = obtenerDatosParaHora(filteredData, hora, fecha);
-                    
-                    if (datos.length > 0) {
-                        // Verificar si ALGUNO de los intervalos está ocupado
-                        const hayOcupados = datos.some(d => d.OcupadoFlag === "1");
+                    if (vistaPorHora) {
+                        // Vista por hora: crear mini-bloques de 30 minutos
+                        const [horaBase] = hora.split(':');
                         
-                        if (vistaPorHora && datos.length > 1) {
-                            // Vista por hora: si hay alguno ocupado, mostrar como ocupado
-                            // Construir tooltip con todos los intervalos
-                            const tooltipItems = datos
-                                .sort((a, b) => a.HoraInicio.localeCompare(b.HoraInicio))
-                                .map(d => {
-                                    const horaCorta = d.HoraInicio.substring(0, 5);
-                                    const estado = d.OcupadoFlag === "1" ? "Ocupado" : "Libre";
-                                    const asunto = d.Subject ? ` - ${d.Subject}` : "";
-                                    return `${horaCorta}: ${estado}${asunto}`;
-                                })
-                                .join(' | ');
+                        // Obtener datos para :00 y :30
+                        const dato00 = datosFiltradosHorario.find(item => 
+                            item.Fecha === fecha && item.HoraInicio.startsWith(`${horaBase}:00`)
+                        );
+                        const dato30 = datosFiltradosHorario.find(item => 
+                            item.Fecha === fecha && item.HoraInicio.startsWith(`${horaBase}:30`)
+                        );
+                        
+                        html += '<td style="padding: 0;"><div class="hour-cell-container">';
+                        
+                        // Bloque 1 (:00)
+                        if (dato00) {
+                            const isOcupado = dato00.OcupadoFlag === "1";
+                            const className = isOcupado ? 'ocupado' : 'libre';
+                            const opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
+                            const content = isOcupado ? (dato00.Subject || 'Ocupado') : '';
+                            const title = dato00.Subject || '';
                             
-                            const className = hayOcupados ? 'ocupado tooltip' : 'libre tooltip';
-                            const opacity = (resaltarOcupadas && !hayOcupados) ? '0.3' : '1';
-                            
-                            html += `<td class="${className}" data-subject="${tooltipItems}" style="opacity: ${opacity}"></td>`;
+                            html += `<div class="half-hour-block ${className}" style="opacity: ${opacity}" title="${title}">`;
+                            html += `<div class="half-hour-time">${horaBase}:00</div>`;
+                            html += `<div class="half-hour-content">${content}</div>`;
+                            html += '</div>';
                         } else {
-                            // Vista de 15 minutos o solo un dato
+                            const opacity = resaltarOcupadas ? '0.3' : '1';
+                            html += `<div class="half-hour-block libre" style="opacity: ${opacity}">`;
+                            html += `<div class="half-hour-time">${horaBase}:00</div>`;
+                            html += '<div class="half-hour-content"></div>';
+                            html += '</div>';
+                        }
+                        
+                        // Bloque 2 (:30)
+                        if (dato30) {
+                            const isOcupado = dato30.OcupadoFlag === "1";
+                            const className = isOcupado ? 'ocupado' : 'libre';
+                            const opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
+                            const content = isOcupado ? (dato30.Subject || 'Ocupado') : '';
+                            const title = dato30.Subject || '';
+                            
+                            html += `<div class="half-hour-block ${className}" style="opacity: ${opacity}" title="${title}">`;
+                            html += `<div class="half-hour-time">${horaBase}:30</div>`;
+                            html += `<div class="half-hour-content">${content}</div>`;
+                            html += '</div>';
+                        } else {
+                            const opacity = resaltarOcupadas ? '0.3' : '1';
+                            html += `<div class="half-hour-block libre" style="opacity: ${opacity}">`;
+                            html += `<div class="half-hour-time">${horaBase}:30</div>`;
+                            html += '<div class="half-hour-content"></div>';
+                            html += '</div>';
+                        }
+                        
+                        html += '</div></td>';
+                        
+                    } else {
+                        // Vista normal (cada 15 minutos)
+                        const datos = obtenerDatosParaHora(datosFiltradosHorario, hora, fecha);
+                        
+                        if (datos.length > 0) {
                             const dato = datos[0];
                             const isOcupado = dato.OcupadoFlag === "1";
                             const className = isOcupado ? 'ocupado tooltip' : 'libre tooltip';
-                            const subject = dato.Subject || (isOcupado ? 'Ocupado' : 'Libre');
+                            const subject = dato.Subject || (isOcupado ? 'Ocupado' : '');
                             const opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
                             
                             html += `<td class="${className}" data-subject="${subject}" style="opacity: ${opacity}"></td>`;
+                        } else {
+                            const opacity = resaltarOcupadas ? '0.3' : '1';
+                            html += `<td class="libre" style="opacity: ${opacity}"></td>`;
                         }
-                    } else {
-                        const opacity = resaltarOcupadas ? '0.3' : '1';
-                        html += `<td class="libre" style="opacity: ${opacity}"></td>`;
                     }
                 });
                 
@@ -20258,11 +20683,97 @@
             
             html += '</tbody></table></div>';
             tableContainer.innerHTML = html;
+            
+            // Marcar bloques consecutivos solo si está activado
+            if (document.getElementById('agruparConsecutivos').checked) {
+                const table = tableContainer.querySelector('table');
+                if (table) marcarGruposConsecutivos(table, fechas.length);
+            }
         }
         
+        // --- Helpers para grupos en "Mostrar Todo" ---
+
+        function calcularEstadisticasGrupo(datosFiltrados, filtroFn) {
+            const datos = datosFiltrados.filter(item => {
+                if (!filtroFn(item.SalaNombre)) return false;
+                const [h, m] = item.HoraInicio.split(':').map(Number);
+                return (h * 60 + m) >= 8 * 60 && (h * 60 + m) <= 17 * 60 + 30;
+            });
+            const horasCompletas = {};
+            datos.forEach(item => {
+                const [h] = item.HoraInicio.split(':');
+                const key = `${item.SalaNombre}-${item.Fecha}-${h}`;
+                if (!horasCompletas[key]) horasCompletas[key] = { ocupado: false };
+                if (item.OcupadoFlag === "1") horasCompletas[key].ocupado = true;
+            });
+            const total = Object.keys(horasCompletas).length;
+            const ocupados = Object.values(horasCompletas).filter(h => h.ocupado).length;
+            const libres = total - ocupados;
+            const pct = total > 0 ? ((ocupados / total) * 100).toFixed(1) : '0.0';
+            return { total, ocupados, libres, pct };
+        }
+
+        function crearResumenGrupo(titulo, stats) {
+            const esDiurno = document.body.classList.contains('modo-diurno');
+            const colorOcupado = esDiurno ? '#7a4f2d' : '#DBB893';
+            const colorLibre   = esDiurno ? '#2d6b0e' : '#EFEFEF';
+            const div = document.createElement('div');
+            div.className = 'summary grupo-summary';
+            div.style.display = 'block';
+            div.innerHTML = `
+                <div class="summary-title">${titulo}</div>
+                <div class="summary-stats">
+                    Resumen del rango: ${stats.total.toLocaleString()} horas •
+                    <strong style="color:${colorOcupado}">${stats.ocupados.toLocaleString()} ocupadas</strong> •
+                    <strong style="color:${colorLibre}">${stats.libres.toLocaleString()} libres</strong> •
+                    ${stats.pct}% ocupación
+                </div>
+            `;
+            return div;
+        }
+
+        function marcarGruposConsecutivos(table, colCount) {
+            for (let col = 0; col < colCount; col++) {
+                const allBlocks = [];
+                table.querySelectorAll('tbody tr').forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length > col + 1) {
+                        cells[col + 1].querySelectorAll('.half-hour-block')
+                            .forEach(b => allBlocks.push(b));
+                    }
+                });
+
+                const groups = [];
+                let curGroup = null, curSubject = null;
+
+                allBlocks.forEach(block => {
+                    const isOcupado = block.classList.contains('ocupado');
+                    const contentEl = block.querySelector('.half-hour-content');
+                    const subject = isOcupado && contentEl ? contentEl.textContent.trim() : null;
+
+                    if (isOcupado && subject && subject === curSubject) {
+                        curGroup.push(block);
+                    } else {
+                        if (curGroup && curGroup.length >= 2) groups.push(curGroup);
+                        curGroup = (isOcupado && subject) ? [block] : null;
+                        curSubject = (isOcupado && subject) ? subject : null;
+                    }
+                });
+                if (curGroup && curGroup.length >= 2) groups.push(curGroup);
+
+                groups.forEach(group => {
+                    group.forEach((block, k) => {
+                        if (k === 0) block.classList.add('group-top');
+                        else if (k === group.length - 1) block.classList.add('group-bottom');
+                        else block.classList.add('group-mid');
+                    });
+                });
+            }
+        }
+
         function renderTablasApiladas(filteredData, fechas, horas, resaltarOcupadas) {
             const tableContainer = document.querySelector('.table-container');
-            const vistaPorHora = document.getElementById('vistaPorHora').checked;
+            const vistaPorHora = true;
             tableContainer.innerHTML = '';
             
             // Obtener salas únicas y ordenarlas según ORDEN_SALAS
@@ -20284,8 +20795,53 @@
                 return a.localeCompare(b, 'es', { sensitivity: 'base' });
             });
             
+            const mostrarGrupo = document.getElementById('mostrarGrupo').value;
+            
+            // Pre-computar resúmenes por grupo si estamos en "Mostrar Todo"
+            const esMostrarTodo = mostrarGrupo === 'todo';
+            const esSala = n => n.includes('SALA') || n.includes('Directorio');
+            const esCabina = n => n.includes('Cabina');
+
+            let primerasSalaInsertada = false;
+            let primerasCabinaInsertada = false;
+
+            let statsSalas = null, statsCabinas = null;
+            if (esMostrarTodo) {
+                statsSalas   = calcularEstadisticasGrupo(filteredData, esSala);
+                statsCabinas = calcularEstadisticasGrupo(filteredData, esCabina);
+            }
+
             salasUnicas.forEach((sala) => {
-                const datosSala = filteredData.filter(item => item.SalaNombre === sala);
+                // Si es "Mostrar Todo", insertar resumen de grupo en el momento correcto
+                if (esMostrarTodo) {
+                    if (esSala(sala) && !primerasSalaInsertada) {
+                        tableContainer.appendChild(crearResumenGrupo('Salas de Reunión', statsSalas));
+                        primerasSalaInsertada = true;
+                    }
+                    if (esCabina(sala) && !primerasCabinaInsertada) {
+                        const sep = document.createElement('div');
+                        sep.className = 'grupo-separador';
+                        tableContainer.appendChild(sep);
+                        tableContainer.appendChild(crearResumenGrupo('Cabinas', statsCabinas));
+                        primerasCabinaInsertada = true;
+                    }
+                }
+
+                // Filtrar por sala y por rango horario
+                const datosSala = filteredData.filter(item => {
+                    if (item.SalaNombre !== sala) return false;
+                    
+                    if (vistaPorHora) {
+                        // En vista por hora: incluir 08:00-08:29 para el bloque de 08:30, 
+                        // y 17:00-17:29 para el bloque de 17:30
+                        const [hora, minuto] = item.HoraInicio.split(':').map(Number);
+                        const horaEnMinutos = hora * 60 + minuto;
+                        return horaEnMinutos >= 8 * 60 && horaEnMinutos <= 17 * 60 + 30;
+                    } else {
+                        // En vista normal: solo 08:30 - 17:30
+                        return estaEnRangoHorario(item.HoraInicio);
+                    }
+                });
                 
                 let ocupados, libres, totalSlots, porcentaje;
                 
@@ -20322,25 +20878,13 @@
                 salaContainer.style.marginBottom = '30px';
                 
                 const salaTitle = document.createElement('div');
-                salaTitle.style.cssText = `
-                    background: rgba(45, 55, 72, 0.9);
-                    padding: 12px 20px;
-                    border-radius: 8px 8px 0 0;
-                    color: white;
-                    font-weight: 600;
-                    font-size: 15px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    gap: 8px;
-                `;
+                salaTitle.className = 'sala-title-header';
                 
                 salaTitle.innerHTML = `
                     <span>${sala}</span>
-                    <span style="font-size: 13px; font-weight: normal; color: #cbd5e0;">
-                        <strong style="color: #fc8181;">${ocupados} ocupadas</strong> • 
-                        <strong style="color: #68d391;">${libres} libres</strong> • 
+                    <span class="sala-stats">
+                        <strong class="stat-ocupado">${ocupados} ocupadas</strong> • 
+                        <strong class="stat-libre">${libres} libres</strong> • 
                         ${porcentaje}% ocupación
                     </span>
                 `;
@@ -20383,36 +20927,134 @@
                     fechas.forEach(fecha => {
                         const cell = document.createElement('td');
                         
-                        const datos = obtenerDatosParaHora(datosSala, hora, fecha);
-                        
-                        if (datos.length > 0) {
-                            const hayOcupados = datos.some(d => d.OcupadoFlag === "1");
+                        if (vistaPorHora) {
+                            // Vista por hora: crear mini-bloques de 30 minutos
+                            cell.style.padding = '0';
                             
-                            if (vistaPorHora && datos.length > 1) {
-                                const tooltipItems = datos
-                                    .sort((a, b) => a.HoraInicio.localeCompare(b.HoraInicio))
-                                    .map(d => {
-                                        const horaCorta = d.HoraInicio.substring(0, 5);
-                                        const estado = d.OcupadoFlag === "1" ? "Ocupado" : "Libre";
-                                        const asunto = d.Subject ? ` - ${d.Subject}` : "";
-                                        return `${horaCorta}: ${estado}${asunto}`;
-                                    })
-                                    .join(' | ');
+                            const [horaBase] = hora.split(':');
+                            
+                            // Obtener datos para :00 y :30
+                            const dato00 = datosSala.find(item => 
+                                item.Fecha === fecha && item.HoraInicio.startsWith(`${horaBase}:00`)
+                            );
+                            const dato30 = datosSala.find(item => 
+                                item.Fecha === fecha && item.HoraInicio.startsWith(`${horaBase}:30`)
+                            );
+                            
+                            const container = document.createElement('div');
+                            container.className = 'hour-cell-container';
+                            
+                            // Primer bloque (XX:00)
+                            const block1 = document.createElement('div');
+                            block1.className = 'half-hour-block';
+                            
+                            if (dato00) {
+                                const isOcupado = dato00.OcupadoFlag === "1";
+                                block1.classList.add(isOcupado ? 'ocupado' : 'libre');
+                                block1.style.opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
                                 
-                                cell.className = hayOcupados ? 'ocupado tooltip' : 'libre tooltip';
-                                cell.setAttribute('data-subject', tooltipItems);
-                                cell.style.opacity = (resaltarOcupadas && !hayOcupados) ? '0.3' : '1';
+                                const timeLabel = document.createElement('div');
+                                timeLabel.className = 'half-hour-time';
+                                timeLabel.textContent = `${horaBase}:00`;
+                                block1.appendChild(timeLabel);
+                                
+                                if (isOcupado && dato00.Subject) {
+                                    const content = document.createElement('div');
+                                    content.className = 'half-hour-content';
+                                    content.textContent = dato00.Subject;
+                                    content.title = dato00.Subject;
+                                    block1.appendChild(content);
+                                } else if (isOcupado) {
+                                    const content = document.createElement('div');
+                                    content.className = 'half-hour-content';
+                                    content.textContent = 'Ocupado';
+                                    block1.appendChild(content);
+                                } else {
+                                    const content = document.createElement('div');
+                                    content.className = 'half-hour-content';
+                                    content.textContent = '';
+                                    block1.appendChild(content);
+                                }
                             } else {
+                                block1.classList.add('libre');
+                                block1.style.opacity = resaltarOcupadas ? '0.3' : '1';
+                                
+                                const timeLabel = document.createElement('div');
+                                timeLabel.className = 'half-hour-time';
+                                timeLabel.textContent = `${horaBase}:00`;
+                                block1.appendChild(timeLabel);
+                                
+                                const content = document.createElement('div');
+                                content.className = 'half-hour-content';
+                                content.textContent = '';
+                                block1.appendChild(content);
+                            }
+                            
+                            // Segundo bloque (XX:30)
+                            const block2 = document.createElement('div');
+                            block2.className = 'half-hour-block';
+                            
+                            if (dato30) {
+                                const isOcupado = dato30.OcupadoFlag === "1";
+                                block2.classList.add(isOcupado ? 'ocupado' : 'libre');
+                                block2.style.opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
+                                
+                                const timeLabel = document.createElement('div');
+                                timeLabel.className = 'half-hour-time';
+                                timeLabel.textContent = `${horaBase}:30`;
+                                block2.appendChild(timeLabel);
+                                
+                                if (isOcupado && dato30.Subject) {
+                                    const content = document.createElement('div');
+                                    content.className = 'half-hour-content';
+                                    content.textContent = dato30.Subject;
+                                    content.title = dato30.Subject;
+                                    block2.appendChild(content);
+                                } else if (isOcupado) {
+                                    const content = document.createElement('div');
+                                    content.className = 'half-hour-content';
+                                    content.textContent = 'Ocupado';
+                                    block2.appendChild(content);
+                                } else {
+                                    const content = document.createElement('div');
+                                    content.className = 'half-hour-content';
+                                    content.textContent = '';
+                                    block2.appendChild(content);
+                                }
+                            } else {
+                                block2.classList.add('libre');
+                                block2.style.opacity = resaltarOcupadas ? '0.3' : '1';
+                                
+                                const timeLabel = document.createElement('div');
+                                timeLabel.className = 'half-hour-time';
+                                timeLabel.textContent = `${horaBase}:30`;
+                                block2.appendChild(timeLabel);
+                                
+                                const content = document.createElement('div');
+                                content.className = 'half-hour-content';
+                                content.textContent = '';
+                                block2.appendChild(content);
+                            }
+                            
+                            container.appendChild(block1);
+                            container.appendChild(block2);
+                            cell.appendChild(container);
+                            
+                        } else {
+                            // Vista normal (cada 15 minutos)
+                            const datos = obtenerDatosParaHora(datosSala, hora, fecha);
+                            
+                            if (datos.length > 0) {
                                 const dato = datos[0];
                                 const isOcupado = dato.OcupadoFlag === "1";
                                 
                                 cell.className = isOcupado ? 'ocupado tooltip' : 'libre tooltip';
-                                cell.setAttribute('data-subject', dato.Subject || (isOcupado ? 'Ocupado' : 'Libre'));
+                                cell.setAttribute('data-subject', dato.Subject || (isOcupado ? 'Ocupado' : ''));
                                 cell.style.opacity = (resaltarOcupadas && !isOcupado) ? '0.3' : '1';
+                            } else {
+                                cell.className = 'libre';
+                                cell.style.opacity = resaltarOcupadas ? '0.3' : '1';
                             }
-                        } else {
-                            cell.className = 'libre';
-                            cell.style.opacity = resaltarOcupadas ? '0.3' : '1';
                         }
                         
                         row.appendChild(cell);
@@ -20424,6 +21066,11 @@
                 table.appendChild(thead);
                 table.appendChild(tbody);
                 
+                // Marcar bloques consecutivos solo si está activado
+                if (document.getElementById('agruparConsecutivos').checked) {
+                    marcarGruposConsecutivos(table, fechas.length);
+                }
+
                 salaContainer.appendChild(salaTitle);
                 salaContainer.appendChild(table);
                 tableContainer.appendChild(salaContainer);
@@ -20433,11 +21080,11 @@
         function updateSummary() {
             const summary = document.getElementById('summary');
             const selectedSala = document.getElementById('salaSelect').value;
-            const mostrarTodas = document.getElementById('mostrarTodas').checked;
-            const vistaPorHora = document.getElementById('vistaPorHora').checked;
+            const mostrarGrupo = document.getElementById('mostrarGrupo').value;
+            const vistaPorHora = true;
             
-            // Solo mostrar resumen cuando está marcado "Mostrar todas las salas"
-            if (!mostrarTodas) {
+            // En "Mostrar Todo" los resúmenes están inline en renderTablasApiladas
+            if (!mostrarGrupo || mostrarGrupo === 'todo') {
                 summary.style.display = 'none';
                 return;
             }
@@ -20447,9 +21094,22 @@
                 return;
             }
             
-            // Usar currentFilteredData en lugar de filtrar nuevamente
+            // Usar currentFilteredData pero filtrar por rango de horario
             // Esto asegura que usamos exactamente los mismos datos que se muestran
-            const datosParaCalculo = currentFilteredData;
+            let datosParaCalculo = currentFilteredData.filter(item => {
+                const vistaPorHora = true;
+                
+                if (vistaPorHora) {
+                    // En vista por hora: incluir 08:00-08:29 para el bloque de 08:30, 
+                    // y 17:00-17:29 para el bloque de 17:30
+                    const [hora, minuto] = item.HoraInicio.split(':').map(Number);
+                    const horaEnMinutos = hora * 60 + minuto;
+                    return horaEnMinutos >= 8 * 60 && horaEnMinutos <= 17 * 60 + 30;
+                } else {
+                    // En vista normal: solo 08:30 - 17:30
+                    return estaEnRangoHorario(item.HoraInicio);
+                }
+            });
             
             if (datosParaCalculo.length === 0) {
                 summary.style.display = 'none';
@@ -20496,14 +21156,22 @@
             const summaryTitle = document.getElementById('summaryTitle');
             const summaryStats = document.getElementById('summaryStats');
             
-            summaryTitle.textContent = 'Todas las salas';
+            const titulosGrupo = {
+                'salas': 'Salas de Reunión',
+                'cabinas': 'Cabinas',
+                'todo': 'Todas las Salas'
+            };
+            summaryTitle.textContent = titulosGrupo[mostrarGrupo] || 'Resumen';
             
             const unidad = vistaPorHora ? 'horas' : 'ranuras';
+            const esDiurno = document.body.classList.contains('modo-diurno');
+            const colorOcupado = esDiurno ? '#7a4f2d' : '#DBB893';
+            const colorLibre   = esDiurno ? '#2d6b0e' : '#EFEFEF';
             
             summaryStats.innerHTML = `
                 Resumen del rango: ${totalSlots.toLocaleString()} ${unidad} • 
-                <strong style="color: #fc8181;">${ocupados.toLocaleString()} ocupadas</strong> • 
-                <strong style="color: #68d391;">${libres.toLocaleString()} libres</strong> • 
+                <strong style="color: ${colorOcupado};">${ocupados.toLocaleString()} ocupadas</strong> • 
+                <strong style="color: ${colorLibre};">${libres.toLocaleString()} libres</strong> • 
                 ${porcentajeOcupado}% ocupación
             `;
             
@@ -20513,34 +21181,23 @@
         // Event listeners
         document.getElementById('salaSelect').addEventListener('change', function() {
             if (this.value) {
-                document.getElementById('mostrarTodas').checked = false;
+                document.getElementById('mostrarGrupo').value = '';
             }
             filterData();
         });
         
-        document.getElementById('mostrarTodas').addEventListener('change', function() {
-            const salaSelect = document.getElementById('salaSelect');
-            
-            if (this.checked) {
-                salaSelect.disabled = true;
-                salaSelect.style.opacity = '0.5';
-                salaSelect.style.cursor = 'not-allowed';
-            } else {
-                salaSelect.disabled = false;
-                salaSelect.style.opacity = '1';
-                salaSelect.style.cursor = 'pointer';
+        document.getElementById('mostrarGrupo').addEventListener('change', function() {
+            if (this.value) {
+                const salaSelect = document.getElementById('salaSelect');
+                salaSelect.value = '';
             }
-            
             filterData();
         });
         
-        document.getElementById('resaltarOcupadas').addEventListener('change', renderTable);
-        
-        document.getElementById('vistaPorHora').addEventListener('change', function() {
+        document.getElementById('agruparConsecutivos').addEventListener('change', function() {
             renderTable();
-            updateSummary();
         });
-        
+
         document.getElementById('vistaMobile').addEventListener('change', function() {
             const container = document.querySelector('.container');
             
@@ -20555,6 +21212,26 @@
             }
             
             renderTable();
+        });
+
+        // Toggle de modo nocturno/diurno
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            const body = document.body;
+            const icon = this.querySelector('.theme-toggle-icon');
+            const text = this.querySelector('span:last-child');
+            
+            if (body.classList.contains('modo-diurno')) {
+                body.classList.remove('modo-diurno');
+                body.classList.add('modo-nocturno');
+                icon.textContent = '🌙';
+                text.textContent = 'Modo Diurno';
+            } else {
+                body.classList.remove('modo-nocturno');
+                body.classList.add('modo-diurno');
+                icon.textContent = '☀️';
+                text.textContent = 'Modo Nocturno';
+            }
+            updateSummary();
         });
 
         // Cargar datos al inicio
