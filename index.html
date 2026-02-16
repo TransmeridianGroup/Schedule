@@ -713,30 +713,41 @@
             font-size: 11px;
         }
 
-        .mobile-view td {
-            min-width: 70px;
-            padding: 0;
-            height: auto;
-        }
-
-        .mobile-view td.hora {
-            padding: 8px 4px;
-            vertical-align: middle;
-        }
-
         .mobile-view th {
             padding: 10px 6px;
             font-size: 12px;
         }
 
-        /* En mobile los bloques de media hora crecen con el contenido */
-        .mobile-view .hour-cell-container {
+        .mobile-view td {
+            min-width: 70px;
+            padding: 0;
+            height: 1px; /* trick: permite que el hijo use height:100% */
+            vertical-align: top;
+        }
+
+        .mobile-view td.hora {
+            padding: 8px 4px;
+            vertical-align: middle;
             height: auto;
         }
 
-        .mobile-view .half-hour-block {
-            height: auto;
+        /* El contenedor llena todo el td */
+        .mobile-view .hour-cell-container {
+            height: 100% !important;
             min-height: 46px;
+        }
+
+        /* Anular regla de bloque único en mobile */
+        .mobile-view .hour-cell-container:has(.half-hour-block:only-child) .half-hour-block {
+            height: auto !important;
+            flex: 1;
+        }
+
+        /* Cada bloque de media hora se expande para no dejar huecos */
+        .mobile-view .half-hour-block {
+            flex: 1;
+            height: auto !important;
+            min-height: 40px;
             padding: 5px 4px;
         }
 
