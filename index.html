@@ -835,7 +835,7 @@
                      alt="Transmeridian Logo" 
                      onerror="console.log('Logo no encontrado en la carpeta actual');">
                 <div class="logo-text">
-                    <h1>Sistema de Gestión de Salas</h1>
+                    <h1>Disponibilidad de Salas</h1>
                     <div class="subtitle">Grupo Transmeridian - Data & Analytics</div>
                 </div>
             </div>
@@ -20805,7 +20805,7 @@
             div.innerHTML = `
                 <div class="summary-title">${titulo}</div>
                 <div class="summary-stats">
-                    Resumen del rango: ${stats.total.toLocaleString()} horas •
+                    Resumen del rango semanal: ${stats.total.toLocaleString()} horas •
                     <strong style="color:${colorOcupado}">${stats.ocupados.toLocaleString()} ocupadas</strong> •
                     <strong style="color:${colorLibre}">${stats.libres.toLocaleString()} libres</strong> •
                     ${stats.pct}% ocupación
@@ -21160,7 +21160,7 @@
             const colorLibre   = esDiurno ? '#2d6b0e' : '#EFEFEF';
             
             summaryStats.innerHTML = `
-                Resumen del rango: ${totalSlots.toLocaleString()} ${unidad} • 
+                Resumen del rango semanal: ${totalSlots.toLocaleString()} ${unidad} • 
                 <strong style="color: ${colorOcupado};">${ocupados.toLocaleString()} ocupadas</strong> • 
                 <strong style="color: ${colorLibre};">${libres.toLocaleString()} libres</strong> • 
                 ${porcentajeOcupado}% ocupación
