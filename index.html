@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vista Semanal de Salas - Transmeridian</title>
+    <title>Vista Semanal de Disponibilidad de Salas - Transmeridian</title>
     <style>
         * {
             margin: 0;
@@ -488,6 +488,51 @@
             font-size: 16px;
         }
 
+        /* Selector de semana */
+        .week-selector {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .week-toggle {
+            background: rgba(45, 55, 72, 0.7);
+            border: 2px solid rgba(74, 85, 104, 0.5);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        body.modo-diurno .week-toggle {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            border: 2px solid #4A90E2;
+            color: white;
+        }
+
+        .week-toggle:hover {
+            background: rgba(45, 55, 72, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        body.modo-diurno .week-toggle:hover {
+            background: linear-gradient(135deg, #357ABD 0%, #2868A8 100%);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        .week-icon {
+            font-size: 18px;
+        }
+
+
         /* Estilos para título de sala */
         .sala-title-header {
             background: rgba(45, 55, 72, 0.9);
@@ -835,14 +880,14 @@
                      alt="Transmeridian Logo" 
                      onerror="console.log('Logo no encontrado en la carpeta actual');">
                 <div class="logo-text">
-                    <h1>Disponibilidad de Salas</h1>
+                    <h1>Sistema de Gestión de Salas</h1>
                     <div class="subtitle">Grupo Transmeridian - Data & Analytics</div>
                 </div>
             </div>
         </div>
 
         <div class="header">
-            <h1>Vista Semanal</h1>
+            <h1>Vista Semanal de Disponibilidad</h1>
             <div class="subtitle">Actualizado: <span id="lastUpdate"></span></div>
         </div>
 
@@ -875,6 +920,13 @@
                     <span>Modo Nocturno</span>
                 </button>
             </div>
+        </div>
+
+        <div class="week-selector">
+            <button class="week-toggle" id="weekToggle">
+                <span class="week-icon">📅</span>
+                <span id="weekToggleText">Ver reservas de la siguiente semana</span>
+            </button>
         </div>
 
         <div id="summary" class="summary" style="display: none;">
@@ -915,6 +967,9 @@
 
         let currentData = [];
         let currentFilteredData = [];
+        let currentWeek = 1; // Semana actual (1 o 2)
+        let week1Dates = []; // Fechas de la semana 1
+        let week2Dates = []; // Fechas de la semana 2
 
         // Función para normalizar formato de hora (agregar :00 si no tiene segundos)
         function normalizarHora(hora) {
@@ -20412,6 +20467,7 @@
                 console.log('📅 Fecha del snapshot:', DATOS_JSON.snapshotDateTime || DATOS_JSON.runDate);
                 console.log('🕐 Muestra de hora:', currentData[0]?.HoraInicio);
                 
+                separateWeeks();
                 populateSalaSelect();
                 filterData();
                 updateLastUpdate();
@@ -20423,6 +20479,26 @@
                     'Ejecuta el script Python para actualizar este archivo.' +
                     '</div>';
             }
+        }
+
+        function separateWeeks() {
+            // Extraer fechas únicas y ordenarlas
+            const allDates = [...new Set(currentData.map(item => item.Fecha))];
+            allDates.sort();
+            
+            // Filtrar solo días laborables
+            const weekdays = allDates.filter(fecha => {
+                const date = new Date(fecha + 'T00:00:00');
+                const dayOfWeek = date.getUTCDay();
+                return dayOfWeek !== 0 && dayOfWeek !== 6;
+            });
+            
+            // Dividir en dos semanas (primeros 5 días y siguientes 5 días)
+            week1Dates = weekdays.slice(0, 5);
+            week2Dates = weekdays.slice(5, 10);
+            
+            console.log('📅 Semana 1:', week1Dates);
+            console.log('📅 Semana 2:', week2Dates);
         }
 
         function populateSalaSelect() {
@@ -20481,6 +20557,10 @@
                 const dayOfWeek = date.getUTCDay();
                 return dayOfWeek !== 0 && dayOfWeek !== 6;
             });
+            
+            // Filtrar por semana seleccionada
+            const weekDates = currentWeek === 1 ? week1Dates : week2Dates;
+            filtered = filtered.filter(item => weekDates.includes(item.Fecha));
             
             // Filtrar según la selección del grupo o sala individual
             if (mostrarGrupo === 'salas') {
@@ -20563,6 +20643,7 @@
                 tableContainer.innerHTML = `
                     <div class="empty-state">
                         <div style="font-size: 48px; margin-bottom: 20px; opacity: 0.5;">📅</div>
+                        <h3>Bienvenido al Sistema de Gestión de Salas</h3>
                         <p>
                             Selecciona una sala del menú desplegable o usa "Mostrar" para ver grupos de salas
                         </p>
@@ -20804,7 +20885,7 @@
             div.innerHTML = `
                 <div class="summary-title">${titulo}</div>
                 <div class="summary-stats">
-                    Resumen del rango semanal: ${stats.total.toLocaleString()} horas •
+                    Resumen del rango: ${stats.total.toLocaleString()} horas •
                     <strong style="color:${colorOcupado}">${stats.ocupados.toLocaleString()} ocupadas</strong> •
                     <strong style="color:${colorLibre}">${stats.libres.toLocaleString()} libres</strong> •
                     ${stats.pct}% ocupación
@@ -21159,7 +21240,7 @@
             const colorLibre   = esDiurno ? '#2d6b0e' : '#EFEFEF';
             
             summaryStats.innerHTML = `
-                Resumen del rango semanal: ${totalSlots.toLocaleString()} ${unidad} • 
+                Resumen del rango: ${totalSlots.toLocaleString()} ${unidad} • 
                 <strong style="color: ${colorOcupado};">${ocupados.toLocaleString()} ocupadas</strong> • 
                 <strong style="color: ${colorLibre};">${libres.toLocaleString()} libres</strong> • 
                 ${porcentajeOcupado}% ocupación
@@ -21218,6 +21299,23 @@
                 text.textContent = 'Modo Nocturno';
             }
             updateSummary();
+        });
+
+        // Event listener para cambio de semana
+        document.getElementById('weekToggle').addEventListener('click', function() {
+            // Alternar entre semana 1 y 2
+            currentWeek = currentWeek === 1 ? 2 : 1;
+            
+            // Actualizar texto del botón
+            const weekText = document.getElementById('weekToggleText');
+            if (currentWeek === 1) {
+                weekText.textContent = 'Ver reservas de la siguiente semana';
+            } else {
+                weekText.textContent = 'Ver reservas de la semana anterior';
+            }
+            
+            // Actualizar vista
+            filterData();
         });
 
         // Cargar datos al inicio
